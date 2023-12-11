@@ -122,6 +122,8 @@ class QtConan(ConanFile):
 
     _submodules_tree = None
 
+    package_folder = "/tmp/build"
+
     @property
     def _settings_build(self):
         return getattr(self, "settings_build", self.settings)
