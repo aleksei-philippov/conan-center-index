@@ -601,7 +601,7 @@ class QtConan(ConanFile):
             }
         if Version(self.version) >= "6.5.0":
             cpp_std_map[23] = "FEATURE_cxx2b"
-        
+
         for std,feature in cpp_std_map.items():
             tc.variables[feature] = "ON" if int(current_cpp_std) >= std else "OFF"
 
@@ -762,9 +762,10 @@ class QtConan(ConanFile):
         if self.settings.os == "Macos":
             save(self, ".qmake.stash" , "")
             save(self, ".qmake.super" , "")
+        cmake_extra_args = os.getenv('CMAKE_EXTRA_ARGS', '').split(',')
         cmake = CMake(self)
         cmake.configure()
-        cmake.build()
+        cmake.build(args=cmake_extra_args)
 
     @property
     def _cmake_executables_file(self):
